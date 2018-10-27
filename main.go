@@ -14,6 +14,12 @@ import (
 )
 
 func main() {
+	if len(os.Args) != 2 {
+		fmt.Printf("Usage: %s <user/repository>\n\n", os.Args[0])
+		fmt.Println("Don't forget to set the environment variable OCTOKIT_ACCESS_TOKEN.")
+		return
+	}
+
 	client := octokit.NewClient(getAuthMethod())
 
 	labels, result := client.Labels().All(nil, getRepoParams())

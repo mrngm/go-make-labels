@@ -11,12 +11,19 @@ software for the time being.
 
 ![I have no idea what I'm doing](https://user-images.githubusercontent.com/519171/45828811-7f984700-bcc7-11e8-8ff5-114ff55d9014.gif)
 
-
 ## Usage
+
+### Preliminaries
+
+```shell
+go get github.com/octokit/go-octokit/octokit
+go build
+```
+
+### Running `go-make-labels`
 
 Populate label configuration in `example.json` and run
 
 ```shell
-export OCTOKIT_ACCESS_TOKEN=1234567890
-go run main.go "kylemacey/go-make-labels"
+OCTOKIT_ACCESS_TOKEN=1234567890 ./go-make-labels "kylemacey/go-make-labels"
 ```
