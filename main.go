@@ -5,6 +5,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -14,8 +15,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Printf("Usage: %s <user/repository>\n\n", os.Args[0])
+	jsonFile := flag.String("json", "example.json", "Use this JSON file for user labels")
+	flag.Parse()
+
+	if len(flag.Args()) != 1 {
+		fmt.Printf("Usage: %s [-json file] <user/repository>\n\n", os.Args[0])
+		flag.PrintDefaults()
+		fmt.Println()
 		fmt.Println("Don't forget to set the environment variable OCTOKIT_ACCESS_TOKEN.")
 		return
 	}
@@ -28,7 +34,7 @@ func main() {
 
 	userlabels := make([]UserLabel, 0)
 
-	json.Unmarshal(getJsonFromFile("example.json"), &userlabels)
+	json.Unmarshal(getJsonFromFile(*jsonFile), &userlabels)
 
 	for i := 0; i < len(userlabels); i++ {
 		if contains(labels, userlabels[i].Name) {
